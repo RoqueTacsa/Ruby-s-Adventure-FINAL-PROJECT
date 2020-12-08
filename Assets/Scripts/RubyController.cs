@@ -13,17 +13,14 @@ public class RubyController : MonoBehaviour
 
     public Text GameOverText;
 
-    public bool gameOver = false;
-    public static bool staticVar = false;
+    public bool gameOver;
     
     public GameObject projectilePrefab;
     public GameObject healthDecrease;
     public GameObject healthIncrease;
-    
+
     public AudioClip throwSound;
     public AudioClip hitSound;
-    public AudioClip victory;
-    public AudioClip loss;
     public AudioSource musicSource;
     
     public int health { get { return currentHealth; }}
@@ -38,7 +35,7 @@ public class RubyController : MonoBehaviour
     float vertical;
     
     Animator animator;
-    Vector2 lookDirection = new Vector2(1,0);
+    public Vector2 lookDirection = new Vector2(1,0);
     
     AudioSource audioSource;
     
@@ -53,6 +50,7 @@ public class RubyController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         SetGameOverText ();
+        gameOver = false;
     }
 
     // Update is called once per frame
@@ -94,6 +92,7 @@ public class RubyController : MonoBehaviour
                 if (character != null)
                 {
                     character.DisplayDialog();
+                    //add audio for frog
                 }
             }
         }
@@ -103,9 +102,6 @@ public class RubyController : MonoBehaviour
             GameOverText.text = "You lost! Press R to restart";
             speed = 0f;
             gameOver = true;
-            staticVar = true;
-            musicSource.clip = loss;
-            musicSource.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -113,6 +109,7 @@ public class RubyController : MonoBehaviour
             if (gameOver == true)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                ScoreScript.scoreValue = 0;
             }
         }
 

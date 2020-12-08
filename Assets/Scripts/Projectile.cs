@@ -24,9 +24,9 @@ public class Projectile : MonoBehaviour
         }
     }
     
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        EnemyController e = other.collider.GetComponent<EnemyController>();
+        EnemyController e = collision.collider.GetComponent<EnemyController>();
         if (e != null)
         {
             e.Fix();
@@ -34,12 +34,20 @@ public class Projectile : MonoBehaviour
     
         Destroy(gameObject);
 
-        HardEnemyController f = other.collider.GetComponent<HardEnemyController>();
+        HardEnemyController f = collision.collider.GetComponent<HardEnemyController>();
         if (f != null)
         {
             f.Fix();
         }
     
+        Destroy(gameObject);
+
+        var enemy = collision.collider.GetComponent<EnemyBehaviour>();
+        if (enemy)
+        {
+            enemy.TakeHit(1);
+        }
+
         Destroy(gameObject);
     }
 }

@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;
 public class GameOverScript : MonoBehaviour
 {
     Text win;
-    public bool gameOver = false;
+    public bool gameOver;
 
     void Start()
     {
         win = GetComponent<Text> ();
         win.text = "";
+        gameOver = false;
     }
 
 
@@ -20,15 +21,29 @@ public class GameOverScript : MonoBehaviour
     {
         if(ScoreScript.scoreValue >= 4)
         {
-            win.text = "You Win! Game Created by Roque Tacsa. Press R to restart";
+            win.text = "You Win! Press X to visit stage two!";
             gameOver = true;
         }
         
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             if (gameOver == true)
             {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("SecondScene");
+            ScoreScript.scoreValue = 0;
+            }
+        }
+        if(ScoreScript.pepperValue >= 25)
+        {
+            win.text = "You Win! Game created by Roque Tacsa! Press R to restart.";
+            gameOver = true;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (gameOver ==true)
+            {
+                SceneManager.LoadScene("MainScene");
+                ScoreScript.pepperValue = 0;
             }
         }
     }

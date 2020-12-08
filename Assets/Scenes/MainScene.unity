@@ -33531,6 +33531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 0
+  victory: {fileID: 0}
 --- !u!1 &997018044
 GameObject:
   m_ObjectHideFlags: 3
@@ -35348,7 +35349,7 @@ PrefabInstance:
         type: 3}
       propertyPath: loss
       value: 
-      objectReference: {fileID: 8300000, guid: 660e177f154d09b45bf43ceb1afc167a, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3310377379382181427, guid: 9acf5ee6f488e974892622d5028c194a,
         type: 3}
       propertyPath: musicSource
